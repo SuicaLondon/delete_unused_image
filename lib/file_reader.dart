@@ -43,7 +43,7 @@ class FileReader {
   }
 
   List<ImageEntityStatistics> analyzeImages({
-    bool ignoreDynamicAssets = true,
+    bool ignoreDynamicAssets = false,
     required List<ImageEntityStatistics> imageEntities,
     required List<FileSystemEntity> configureEntities,
     required List<FileSystemEntity> libEntites,
