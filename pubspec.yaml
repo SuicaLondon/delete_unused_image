@@ -1,6 +1,7 @@
 name: delete_unused_image
-description: A sample command-line application.
-version: 1.0.0
+owner: suica.dev
+description: A CLI application delete unused image in normal flutter project.
+version: 1.0.1
 # homepage: https://www.example.com
 
 environment:

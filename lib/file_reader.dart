@@ -118,7 +118,7 @@ class FileReader {
         }));
       }
     }
-    if (deleteList.length > 0) {
+    if (deleteList.isNotEmpty) {
       Future.wait(deleteList).then((value) {
         printWarning('Deleted all unsed assets completed');
       }).catchError((error) {
