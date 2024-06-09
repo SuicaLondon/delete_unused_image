@@ -1,6 +1,6 @@
 import 'dart:io';
 
-extension FileExtention on FileSystemEntity {
+extension FileExtension on FileSystemEntity {
   String? get name {
     return path.split("/").last;
   }
