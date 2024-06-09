@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:delete_unused_image/extension/file_extension.dart';
+import 'file_extension.dart';
 
 extension DirectoryExtension on Directory {
   Future<List<FileSystemEntity>> getFileEntities(

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:delete_unused_image/file_reader.dart';
-import 'package:delete_unused_image/image_modal.dart';
+import 'utils/file_reader.dart';
+import 'model/image_model.dart';
 
 void main(List<String> arguments) async {
   ArgParser argParser = ArgParser();
