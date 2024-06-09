@@ -3,7 +3,7 @@ owner: suica.dev
 description: A CLI application delete unused image in normal flutter project.
 repository: https://github.com/SuicaLondon/delete_unused_image
 homepage: https://pub.dev/packages/delete_unused_image
-version: 1.0.4
+version: 1.0.5
 # homepage: https://www.example.com
 
 environment:
