@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Bugfix
+
 ## 1.0.0
 
 - Initial version.
