@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:delete_unused_image/extension/file_extension.dart';
-import 'package:delete_unused_image/image_modal.dart';
-import 'package:delete_unused_image/extension/directory_extension.dart';
-import 'package:delete_unused_image/utils/print.dart';
-import 'package:delete_unused_image/utils/regex.dart';
+import '../extension/file_extension.dart';
+import '../model/image_model.dart';
+import '../extension/directory_extension.dart';
+import 'print.dart';
+import 'regex.dart';
 
 class FileReader {
   late final String rootPath;
@@ -30,7 +30,7 @@ class FileReader {
 
   Future<List<ImageEntityStatistics>> readAssetsEntities() async {
     return (await assetsDir.getFileEntities(recursive: true))
-        .map((entity) => ImageEntityStatistics(entity: entity, refered: 0))
+        .map((entity) => ImageEntityStatistics(entity: entity, referred: 0))
         .toList();
   }
 
@@ -57,11 +57,11 @@ class FileReader {
           String? extensionName = imageEntity.entity.ext;
           if (imageName != null) {
             if (fileString.contains(imageName)) {
-              imageEntity.refered++;
+              imageEntity.referred++;
             } else if (imageFileName != null &&
                 fileString.contains(imageFileName)) {
               // Some file seperate the file with it file fomat
-              imageEntity.refered++;
+              imageEntity.referred++;
             } else if (!ignoreDynamicAssets) {
               // For the image like account_vip$vipLvl.webp
               if (numberRegex.hasMatch(imageName)) {
@@ -71,7 +71,7 @@ class FileReader {
 
                 RegExp imagePathRegex = RegExp(replacedPattern);
                 if (imagePathRegex.hasMatch(fileString)) {
-                  imageEntity.refered++;
+                  imageEntity.referred++;
                 }
               } else if (extensionName != null &&
                   imageFileName != null &&
@@ -85,7 +85,7 @@ class FileReader {
                     imgPath = imgPath.replaceAll(quoteRegex, '');
                     List<String> splitStrings = imgPath.split(fuzzyRegex);
                     if (splitStrings.every((str) => imageName.contains(str))) {
-                      imageEntity.refered++;
+                      imageEntity.referred++;
                     }
                   }
                 }
@@ -97,16 +97,16 @@ class FileReader {
         }
       }
     }
-    imageEntities.sort((a, b) => b.refered.compareTo(a.refered));
+    imageEntities.sort((a, b) => b.referred.compareTo(a.referred));
     return imageEntities;
   }
 
   void deleteImage(List<ImageEntityStatistics> imageEntities) {
     List<Future<FileSystemEntity>> deleteList = [];
     for (var imageEntity in imageEntities) {
-      if (imageEntity.refered > 0) {
+      if (imageEntity.referred > 0) {
         printSuccess(
-            '${imageEntity.entity.path} ----- refered ${imageEntity.refered}');
+            '${imageEntity.entity.path} ----- refered ${imageEntity.referred}');
       } else {
         deleteList.add(imageEntity.entity.delete().then((value) {
           printWarning('${imageEntity.entity.path} unsed ----- deleted');
