@@ -46,9 +46,9 @@ class FileReader {
     bool ignoreDynamicAssets = false,
     required List<ImageEntityStatistics> imageEntities,
     required List<FileSystemEntity> configureEntities,
-    required List<FileSystemEntity> libEntites,
+    required List<FileSystemEntity> libEntities,
   }) {
-    for (var codeEntity in [...configureEntities, ...libEntites]) {
+    for (var codeEntity in [...configureEntities, ...libEntities]) {
       if (codeEntity is File) {
         String fileString = codeEntity.readAsStringSync();
         for (var imageEntity in imageEntities) {
@@ -60,7 +60,7 @@ class FileReader {
               imageEntity.referred++;
             } else if (imageFileName != null &&
                 fileString.contains(imageFileName)) {
-              // Some file seperate the file with it file fomat
+              // Some file separate the file with it file fomat
               imageEntity.referred++;
             } else if (!ignoreDynamicAssets) {
               // For the image like account_vip$vipLvl.webp
@@ -106,10 +106,10 @@ class FileReader {
     for (var imageEntity in imageEntities) {
       if (imageEntity.referred > 0) {
         printSuccess(
-            '${imageEntity.entity.path} ----- refered ${imageEntity.referred}');
+            '${imageEntity.entity.path} ----- referred ${imageEntity.referred}');
       } else {
         deleteList.add(imageEntity.entity.delete().then((value) {
-          printWarning('${imageEntity.entity.path} unsed ----- deleted');
+          printWarning('${imageEntity.entity.path} unused ----- deleted');
           return value;
         }).catchError((error) {
           printError(
@@ -120,12 +120,12 @@ class FileReader {
     }
     if (deleteList.isNotEmpty) {
       Future.wait(deleteList).then((value) {
-        printWarning('Deleted all unsed assets completed');
+        printWarning('Deleted all unused assets completed');
       }).catchError((error) {
         printError('Was unable to delete some of the assets');
       });
     } else {
-      printSuccess('Congragulation! Nothing to delete');
+      printSuccess('Congratulation! Nothing to delete');
     }
   }
 }

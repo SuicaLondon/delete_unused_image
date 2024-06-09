@@ -29,14 +29,14 @@ void main(List<String> arguments) async {
 
   final List<FileSystemEntity> configureEntities =
       await fileReader.readRootFileEntity();
-  final List<FileSystemEntity> libEntites =
+  final List<FileSystemEntity> libEntities =
       await fileReader.readLibFileEntity();
 
   fileReader.analyzeImages(
     ignoreDynamicAssets: ignoreDynamicAssets,
     imageEntities: imageEntities,
     configureEntities: configureEntities,
-    libEntites: libEntites,
+    libEntities: libEntities,
   );
 
   fileReader.deleteImage(imageEntities);
